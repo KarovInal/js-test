@@ -1,10 +1,29 @@
-function CoffeeMachine(power) {
-  this.waterAmount = 0;
+function CoffeeMachine(power, capacity) {
 
   var WATER_HEAT_CAPACITY = 4200;
 
-  var self = this;
+  var waterAmount = 0;
   var timerId;
+  var self = this;
+
+  this.setWaterAmount = function(amount) {
+    if (amount < 0) {
+      throw new Error("Значение должно быть положительным");
+    }
+    if (amount > capacity) {
+      throw new Error("Нельзя залить воды больше, чем " + capacity);
+    }
+
+    waterAmount = amount;
+  };
+
+  this.getWaterAmount = function() {
+    return waterAmount;
+  };
+
+  this.getPower = function() {
+    return power;
+  }
 
   function getBoilTime() {
     return self.waterAmount * WATER_HEAT_CAPACITY * 80 / power;
@@ -24,7 +43,9 @@ function CoffeeMachine(power) {
 
 }
 
-var coffeeMachine = new CoffeeMachine(50000);
-coffeeMachine.waterAmount = 200;
+var coffeeMachine = new CoffeeMachine(5000, 1000);
+
+coffeeMachine.setWaterAmount(200);
+console.log(coffeeMachine.getPower());
 
 coffeeMachine.run();
