@@ -33,8 +33,13 @@ function CoffeeMachine(power, capacity) {
     return self.waterAmount * WATER_HEAT_CAPACITY * 80 / power;
   }
 
-  function onReady() {
+  onReady = function() {
     console.log( 'Кофе готово!' );
+  }
+
+  this.setOnReady = function(func) {
+    func = func.bind(this);
+    onReady = func;
   }
 
   this.run = function() {
@@ -48,3 +53,12 @@ function CoffeeMachine(power, capacity) {
 }
 
 var coffeeMachine = new CoffeeMachine(5000, 1000);
+
+coffeeMachine.setOnReady(function() {
+  var amount = this.getWaterAmount();
+  console.log( 'Готов кофе: ' + amount + 'мл' );
+})
+
+coffeeMachine.setWaterAmount(200);
+
+coffeeMachine.run();
