@@ -43,7 +43,9 @@ function CoffeeMachine(power, capacity) {
   }
 
   this.run = function() {
-    timerId = setTimeout(onReady, getBoilTime());
+    timerId = setTimeout(function() {
+      onReady()
+    }, getBoilTime());
   }
 
   this.stop = function() {
@@ -62,3 +64,8 @@ coffeeMachine.setOnReady(function() {
 coffeeMachine.setWaterAmount(200);
 
 coffeeMachine.run();
+
+coffeeMachine.setOnReady(function() {
+  var amount = this.getWaterAmount();
+  console.log( 'Готов кофеee: ' + amount + 'мл' );
+})
