@@ -1,4 +1,19 @@
+function Machine() {
+  this._enabled = false;
+
+  var self = this;
+
+  this.enable = function() {
+    self._enabled = true;
+  }
+
+  this.disable = function() {
+    self._enabled = false;
+  }
+}
+
 function CoffeeMachine(power, capacity) {
+  Machine.call(this);
 
   var WATER_HEAT_CAPACITY = 4200;
 
@@ -42,30 +57,27 @@ function CoffeeMachine(power, capacity) {
     onReady = func;
   }
 
+  this.isRunning = function() {
+    return !!timerId;
+  }
+
   this.run = function() {
+    if(!this._enabled) 
+      throw new Error("Кофеварка выключена");
+
     timerId = setTimeout(function() {
       onReady()
     }, getBoilTime());
   }
 
-  this.stop = function() {
+  var parentDisable = this.disable
+  this.disable = function() {
+    parentDisable();
     clearTimeout(timerId);
   }
 
 }
 
-var coffeeMachine = new CoffeeMachine(5000, 1000);
-
-coffeeMachine.setOnReady(function() {
-  var amount = this.getWaterAmount();
-  console.log( 'Готов кофе: ' + amount + 'мл' );
-})
-
-coffeeMachine.setWaterAmount(200);
-
+var coffeeMachine = new CoffeeMachine(10000);
+coffeeMachine.enable();
 coffeeMachine.run();
-
-coffeeMachine.setOnReady(function() {
-  var amount = this.getWaterAmount();
-  console.log( 'Готов кофеee: ' + amount + 'мл' );
-})
