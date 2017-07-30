@@ -17,6 +17,10 @@ function CoffeeMachine(power, capacity) {
     waterAmount = amount;
   };
 
+  this.addWater = function(water) {
+    this.setWaterAmount(water + waterAmount);
+  }
+
   this.getWaterAmount = function() {
     return waterAmount;
   };
@@ -44,8 +48,3 @@ function CoffeeMachine(power, capacity) {
 }
 
 var coffeeMachine = new CoffeeMachine(5000, 1000);
-
-coffeeMachine.setWaterAmount(200);
-console.log(coffeeMachine.getPower());
-
-coffeeMachine.run();
