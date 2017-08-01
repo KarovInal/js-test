@@ -1,9 +1,18 @@
 Function.prototype.defer = function(ms) {
-    setTimeout(this, ms);
+    var self = this;
+
+    return function() {
+        var arg = arguments;
+        setTimeout(function() {
+            self.apply(null, arg)
+        }, ms);
+    }
 }
 
-function foo() {
-    console.log('Hello!')
+function foo(a, b) {
+    console.log(a + b)
 }
 
-foo.defer(1000);
+var foo2 = foo.defer(100);
+
+foo2(1, 2);
