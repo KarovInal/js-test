@@ -1,0 +1,13 @@
+.menu ul {
+    display: none;
+    margin: 0;
+  }
+  
+  .menu {
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .menu.open ul {
+    display: block;
+  }
