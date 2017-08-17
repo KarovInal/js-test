@@ -22,10 +22,10 @@ function Vote({ elem }) {
 
   this.setVote = function(userVote) {
     vote = userVote;
-    render();
+    render()
   }
 
   $up.on('click', up);
   $down.on('click', down);
-
+  
 };
