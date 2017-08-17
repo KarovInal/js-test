@@ -11,7 +11,6 @@ var menu = new Menu({
   
   // получить сгенерированный DOM-элемент меню
   var elem = menu.getElem();
-  menu.getElem();
   
   // вставить меню в нужное место страницы
   document.body.appendChild(elem);
