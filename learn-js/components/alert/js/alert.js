@@ -8,6 +8,6 @@
 
   };
 
-  this.SimpleAlert = SimpleAlert;
+  window.SimpleAlert = SimpleAlert;
 
-})(this);
+})(window);
